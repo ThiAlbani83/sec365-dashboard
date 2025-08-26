@@ -1,10 +1,6 @@
 import CircularKPI from "../components/CircularKPI";
-import {
-  ExclamationTriangleIcon,
-  PlayIcon,
-  ShieldExclamationIcon,
-  ExclamationCircleIcon,
-} from "@heroicons/react/24/outline";
+import SimpleKPI from "../components/SimpleKPI";
+import SystemRadar from "../components/SystemRadar";
 
 const Dashboard = () => {
   // Dados dos incidentes de segurança
@@ -16,6 +12,15 @@ const Dashboard = () => {
     mediumSeverity: 32,
   };
 
+  // Dados dos novos KPIs
+  const additionalMetrics = {
+    uptime: 99.7,
+    responseTime: 234,
+    activeUsers: 1247,
+    completedTasks: 89,
+    efficiency: 94.3,
+  };
+
   return (
     <div className="p-6">
       <div className="mb-6">
@@ -25,14 +30,13 @@ const Dashboard = () => {
         </p>
       </div>
 
-      {/* KPIs de Segurança */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      {/* KPIs de Segurança Principais - Compactos */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <CircularKPI
           title="New Cases"
           value={securityMetrics.newCases}
           total={securityMetrics.totalCases}
           color="blue"
-          icon={<ExclamationTriangleIcon className="w-6 h-6 text-blue-600" />}
         />
 
         <CircularKPI
@@ -40,7 +44,6 @@ const Dashboard = () => {
           value={securityMetrics.inProgress}
           total={securityMetrics.totalCases}
           color="green"
-          icon={<PlayIcon className="w-6 h-6 text-green-600" />}
         />
 
         <CircularKPI
@@ -48,7 +51,6 @@ const Dashboard = () => {
           value={securityMetrics.highSeverity}
           total={securityMetrics.totalCases}
           color="red"
-          icon={<ShieldExclamationIcon className="w-6 h-6 text-red-600" />}
         />
 
         <CircularKPI
@@ -56,8 +58,63 @@ const Dashboard = () => {
           value={securityMetrics.mediumSeverity}
           total={securityMetrics.totalCases}
           color="orange"
-          icon={<ExclamationCircleIcon className="w-6 h-6 text-orange-600" />}
         />
+      </div>
+
+      {/* Nova seção: KPIs Laterais + Radar Central Expandido */}
+      <div className="grid grid-cols-12 gap-6 mb-8 min-h-[500px]">
+        {/* KPIs do lado esquerdo */}
+        <div className="col-span-12 lg:col-span-2 space-y-4">
+          <SimpleKPI
+            title="System Uptime"
+            value={`${additionalMetrics.uptime}%`}
+            subtitle="Últimas 24 horas"
+            color="green"
+            trend={{ type: "up", value: "+0.2%" }}
+          />
+
+          <SimpleKPI
+            title="Response Time"
+            value={`${additionalMetrics.responseTime}ms`}
+            subtitle="Tempo médio de resposta"
+            color="blue"
+            trend={{ type: "down", value: "-15ms" }}
+          />
+
+          <SimpleKPI
+            title="Active Users"
+            value={additionalMetrics.activeUsers.toLocaleString()}
+            subtitle="Usuários online agora"
+            color="purple"
+            trend={{ type: "up", value: "+47" }}
+          />
+        </div>
+
+        {/* Radar Central Expandido */}
+        <div className="col-span-12 lg:col-span-8 flex items-center justify-center">
+          <div className="w-full h-full">
+            <SystemRadar />
+          </div>
+        </div>
+
+        {/* KPIs do lado direito */}
+        <div className="col-span-12 lg:col-span-2 space-y-4">
+          <SimpleKPI
+            title="Tasks Completed"
+            value={`${additionalMetrics.completedTasks}%`}
+            subtitle="Taxa de conclusão hoje"
+            color="orange"
+            trend={{ type: "up", value: "+3%" }}
+          />
+
+          <SimpleKPI
+            title="System Efficiency"
+            value={`${additionalMetrics.efficiency}%`}
+            subtitle="Performance geral"
+            color="red"
+            trend={{ type: "up", value: "+1.2%" }}
+          />
+        </div>
       </div>
 
       {/* Tabela de Chamados */}
@@ -108,8 +165,12 @@ const Dashboard = () => {
                     No Prazo
                   </span>
                 </td>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">3</td>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">127</td>
+                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">
+                  3
+                </td>
+                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">
+                  127
+                </td>
                 <td className="px-4 py-3 whitespace-nowrap">
                   <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">
                     Crítico
@@ -117,9 +178,7 @@ const Dashboard = () => {
                 </td>
                 <td className="px-4 py-3 whitespace-nowrap">
                   <div className="flex items-center">
-                    <div className="flex text-yellow-400">
-                      ★★★★☆
-                    </div>
+                    <div className="flex text-yellow-400">★★★★☆</div>
                     <span className="ml-2 text-sm text-gray-500">4.0</span>
                   </div>
                 </td>
@@ -139,8 +198,12 @@ const Dashboard = () => {
                     Atenção
                   </span>
                 </td>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">1</td>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">45</td>
+                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">
+                  1
+                </td>
+                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">
+                  45
+                </td>
                 <td className="px-4 py-3 whitespace-nowrap">
                   <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-orange-100 text-orange-800">
                     Alto
@@ -148,9 +211,7 @@ const Dashboard = () => {
                 </td>
                 <td className="px-4 py-3 whitespace-nowrap">
                   <div className="flex items-center">
-                    <div className="flex text-yellow-400">
-                      ★★★☆☆
-                    </div>
+                    <div className="flex text-yellow-400">★★★☆☆</div>
                     <span className="ml-2 text-sm text-gray-500">3.0</span>
                   </div>
                 </td>
@@ -170,8 +231,12 @@ const Dashboard = () => {
                     No Prazo
                   </span>
                 </td>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">5</td>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">89</td>
+                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">
+                  5
+                </td>
+                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">
+                  89
+                </td>
                 <td className="px-4 py-3 whitespace-nowrap">
                   <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
                     Médio
@@ -179,9 +244,7 @@ const Dashboard = () => {
                 </td>
                 <td className="px-4 py-3 whitespace-nowrap">
                   <div className="flex items-center">
-                    <div className="flex text-yellow-400">
-                      ★★★★★
-                    </div>
+                    <div className="flex text-yellow-400">★★★★★</div>
                     <span className="ml-2 text-sm text-gray-500">5.0</span>
                   </div>
                 </td>
@@ -201,8 +264,12 @@ const Dashboard = () => {
                     Atrasado
                   </span>
                 </td>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">2</td>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">234</td>
+                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">
+                  2
+                </td>
+                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">
+                  234
+                </td>
                 <td className="px-4 py-3 whitespace-nowrap">
                   <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">
                     Baixo
@@ -210,9 +277,7 @@ const Dashboard = () => {
                 </td>
                 <td className="px-4 py-3 whitespace-nowrap">
                   <div className="flex items-center">
-                    <div className="flex text-yellow-400">
-                      ★★☆☆☆
-                    </div>
+                    <div className="flex text-yellow-400">★★☆☆☆</div>
                     <span className="ml-2 text-sm text-gray-500">2.0</span>
                   </div>
                 </td>
@@ -232,8 +297,12 @@ const Dashboard = () => {
                     No Prazo
                   </span>
                 </td>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">7</td>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">156</td>
+                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">
+                  7
+                </td>
+                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 text-center">
+                  156
+                </td>
                 <td className="px-4 py-3 whitespace-nowrap">
                   <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
                     Médio
@@ -241,9 +310,7 @@ const Dashboard = () => {
                 </td>
                 <td className="px-4 py-3 whitespace-nowrap">
                   <div className="flex items-center">
-                    <div className="flex text-yellow-400">
-                      ★★★★☆
-                    </div>
+                    <div className="flex text-yellow-400">★★★★☆</div>
                     <span className="ml-2 text-sm text-gray-500">4.5</span>
                   </div>
                 </td>

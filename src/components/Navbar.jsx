@@ -2,7 +2,7 @@ import { Bars3Icon } from "@heroicons/react/24/outline";
 
 const Navbar = ({ onToggleSidebar }) => {
   return (
-    <nav className="bg-white shadow-sm border-b border-gray-200 fixed w-full z-30 top-0">
+    <nav className=" shadow-sm bg-[#043345] fixed w-full z-30 top-0">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start">
@@ -17,12 +17,11 @@ const Navbar = ({ onToggleSidebar }) => {
 
             {/* Logo da empresa */}
             <a href="#" className="flex ml-2 md:mr-24">
-              <div className="h-8 mr-3 bg-[#043345] rounded-lg flex items-center justify-center px-3">
-                <span className="text-white font-bold text-lg">SEC365</span>
-              </div>
-              <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-gray-900">
-                Dashboard
-              </span>
+              <img
+                src="/Logo-Color-Verde.png"
+                alt="SEC365 Logo"
+                className="h-10 mr-3"
+              />
             </a>
           </div>
 

@@ -54,7 +54,7 @@ const Sidebar = ({ isOpen, onClose, activeItem, setActiveItem }) => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 z-50 w-64 h-screen pt-20 transition-transform bg-[#043345] border-r border-gray-200 sm:translate-x-0 ${
+        className={`fixed top-16 left-0 z-50 w-64 py-8 h-[calc(100vh-4rem)] transition-transform bg-[#043345] border-r border-gray-200 sm:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } sm:block`}
       >
@@ -66,12 +66,7 @@ const Sidebar = ({ isOpen, onClose, activeItem, setActiveItem }) => {
           <XMarkIcon className="w-6 h-6" />
         </button>
 
-        <div className="h-full px-3 pb-4 overflow-y-auto">
-          <img
-            src="/logo.png"
-            alt="Logo"
-            className="w-32 h-auto mx-auto mb-4"
-          />
+        <div className="h-full px-3 pb-4 pt-4 overflow-y-auto">
           <ul className="space-y-2 font-medium">
             {menuItems.map((item) => {
               const Icon = item.icon;
