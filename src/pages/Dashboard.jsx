@@ -1,6 +1,6 @@
 import CircularKPI from "../components/CircularKPI";
 import SimpleKPI from "../components/SimpleKPI";
-import SystemRadar from "../components/SystemRadar";
+import HeatMap from "../components/HeatMap";
 
 const Dashboard = () => {
   // Dados dos incidentes de segurança
@@ -90,10 +90,10 @@ const Dashboard = () => {
           />
         </div>
 
-        {/* Radar Central Expandido */}
+        {/* Mapa de Calor Central Expandido */}
         <div className="col-span-12 lg:col-span-8 flex items-center justify-center">
           <div className="w-full h-full">
-            <SystemRadar />
+            <HeatMap />
           </div>
         </div>
 
